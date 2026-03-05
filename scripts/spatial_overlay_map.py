@@ -41,8 +41,35 @@ class SpatialOverlayMap:
     def load_shelter_data(self):
         """載入避難所資料"""
         try:
-            return pd.read_csv('data/shelters_cleaned.csv', encoding='utf-8-sig')
-        except:
+            df = pd.read_csv('data/shelters_cleaned.csv', encoding='utf-8-sig')
+            
+            # 根據室內/室外欄位創建is_indoor欄位
+            def classify_shelter(row):
+                if pd.notna(row['室內']) and row['室內'] == '是':
+                    return True
+                elif pd.notna(row['室外']) and row['室外'] == '是':
+                    return False
+                else:
+                    # 如果都沒有標記，根據名稱推斷
+                    name = str(row['避難收容處所名稱']).lower()
+                    indoor_keywords = ['活動中心', '禮堂', '體育館', '學校', '社區中心', '辦公處']
+                    outdoor_keywords = ['公園', '廣場', '體育場', '停車場']
+                    
+                    for keyword in indoor_keywords:
+                        if keyword in name:
+                            return True
+                    for keyword in outdoor_keywords:
+                        if keyword in name:
+                            return False
+                    
+                    # 預設為室內
+                    return True
+            
+            df['is_indoor'] = df.apply(classify_shelter, axis=1)
+            return df
+            
+        except Exception as e:
+            print(f"載入避難所資料失敗: {e}")
             # 如果載入失敗，創建模擬資料
             shelters = []
             indoor_places = ["活動中心", "禮堂", "體育館", "學校", "社區中心"]
