@@ -93,6 +93,13 @@ class SpatialOverlayMap:
             
             return pd.DataFrame(shelters)
     
+    def validate_coordinates(self, lat, lon):
+        """驗證坐標是否在台灣合理範圍內"""
+        # 台灣大致邊界
+        if lat < 21.8 or lat > 25.5 or lon < 119.5 or lon > 122.5:
+            return False
+        return True
+    
     def get_aqi_color(self, aqi):
         """根據AQI值獲取顏色"""
         if aqi <= 50:
@@ -141,7 +148,7 @@ class SpatialOverlayMap:
             tiles='OpenStreetMap'
         )
         
-        # 添加AQI測站圖層
+        # 添加AQI測站圖層（先創建但不添加到地圖）
         aqi_group = folium.FeatureGroup(name='AQI 測站')
         
         for _, station in self.aqi_data.iterrows():
@@ -167,8 +174,6 @@ class SpatialOverlayMap:
                 tooltip=f"{station['name']}: AQI {station['aqi']}"
             ).add_to(aqi_group)
         
-        aqi_group.add_to(m)
-        
         # 添加避難所圖層
         indoor_group = folium.FeatureGroup(name='室內避難所')
         outdoor_group = folium.FeatureGroup(name='室外避難所')
@@ -180,6 +185,11 @@ class SpatialOverlayMap:
             try:
                 lat = float(shelter['緯度'])
                 lon = float(shelter['經度'])
+                
+                # 驗證坐標是否在合理範圍內
+                if not self.validate_coordinates(lat, lon):
+                    continue  # 跳過不合理坐標
+                
                 is_indoor = shelter['is_indoor']
                 name = shelter['避難收容處所名稱']
                 address = shelter.get('避難收容處所地址', '未知地址')
@@ -212,10 +222,11 @@ class SpatialOverlayMap:
             except Exception as e:
                 continue
         
+        # 先添加避難所圖層（底層）
         indoor_group.add_to(m)
         outdoor_group.add_to(m)
         
-        # 添加AQI熱力圖
+        # 再添加AQI熱力圖（中層）
         heat_data = []
         for _, station in self.aqi_data.iterrows():
             heat_data.append([station['lat'], station['lon'], float(station['aqi'])])
@@ -237,6 +248,9 @@ class SpatialOverlayMap:
                 }
             ).add_to(heatmap_group)
             heatmap_group.add_to(m)
+        
+        # 最後添加AQI測站圖層（頂層，確保不被遮擋）
+        aqi_group.add_to(m)
         
         # 添加圖例
         legend_html = '''
