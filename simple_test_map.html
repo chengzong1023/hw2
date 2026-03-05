@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>台灣AQI與避難所地圖</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        #map { height: 100vh; width: 100%; }
+        .legend {
+            padding: 10px;
+            background: white;
+            line-height: 1.5;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // 創建地圖
+        var map = L.map('map').setView([23.8, 120.9], 7);
+        
+        // 添加底圖
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        // AQI測站數據
+        var aqiStations = [
+            {name: "台北", lat: 25.0173, lon: 121.5395, aqi: 45},
+            {name: "新北", lat: 25.0167, lon: 121.4667, aqi: 52},
+            {name: "台中", lat: 24.1477, lon: 120.6736, aqi: 67},
+            {name: "高雄", lat: 22.6273, lon: 120.3014, aqi: 150},
+            {name: "台南", lat: 22.9999, lon: 120.2269, aqi: 41}
+        ];
+        
+        // 避難所數據
+        var shelters = [
+            {name: "台北活動中心", lat: 25.0200, lon: 121.5400, indoor: true},
+            {name: "新北公園", lat: 25.0100, lon: 121.4600, indoor: false},
+            {name: "台中體育館", lat: 24.1500, lon: 120.6800, indoor: true},
+            {name: "高雄廣場", lat: 22.6200, lon: 120.3100, indoor: false}
+        ];
+        
+        // 添加AQI測站
+        aqiStations.forEach(function(station) {
+            var color = station.aqi <= 50 ? 'green' : 
+                      station.aqi <= 100 ? 'yellow' : 
+                      station.aqi <= 150 ? 'orange' : 'red';
+            
+            L.circleMarker([station.lat, station.lon], {
+                radius: 8,
+                fillColor: color,
+                color: '#000',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map)
+            .bindPopup("<b>" + station.name + "</b><br>AQI: " + station.aqi);
+        });
+        
+        // 添加避難所
+        shelters.forEach(function(shelter) {
+            var icon = L.divIcon({
+                html: shelter.indoor ? 
+                    '<i class="fas fa-home" style="color: blue; font-size: 16px;"></i>' :
+                    '<i class="fas fa-tree" style="color: green; font-size: 16px;"></i>',
+                iconSize: [20, 20],
+                className: 'custom-div-icon'
+            });
+            
+            L.marker([shelter.lat, shelter.lon], {icon: icon})
+            .addTo(map)
+            .bindPopup("<b>" + shelter.name + "</b><br>類型: " + (shelter.indoor ? '室內' : '室外'));
+        });
+        
+        // 添加圖例
+        var legend = L.control({position: 'topright'});
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend');
+            div.innerHTML = '<h4>圖例</h4>' +
+                '<b>AQI測站</b><br>' +
+                '<i style="background: green; width: 12px; height: 12px; display: inline-block; border-radius: 50%;"></i> 良好 (0-50)<br>' +
+                '<i style="background: yellow; width: 12px; height: 12px; display: inline-block; border-radius: 50%;"></i> 普通 (51-100)<br>' +
+                '<i style="background: orange; width: 12px; height: 12px; display: inline-block; border-radius: 50%;"></i> 不健康 (101-150)<br>' +
+                '<i style="background: red; width: 12px; height: 12px; display: inline-block; border-radius: 50%;"></i> 危害 (151+)<br><br>' +
+                '<b>避難所</b><br>' +
+                '<i class="fas fa-home" style="color: blue;"></i> 室內避難所<br>' +
+                '<i class="fas fa-tree" style="color: green;"></i> 室外避難所';
+            return div;
+        };
+        legend.addTo(map);
+    </script>
+</body>
+</html>

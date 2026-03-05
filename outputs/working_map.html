@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_12c0c7d8b5f89f7b8a488371c7b097b8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                top: 10px; right: 10px; width: 200px; height: 200px; 
+                background-color: white; border:2px solid grey; z-index:9999; 
+                font-size:14px; padding: 10px">
+    <h4>圖例</h4>
+    <b>AQI測站</b><br>
+    <i class="fa fa-circle" style="color:green"></i> 良好 (0-50)<br>
+    <i class="fa fa-circle" style="color:yellow"></i> 普通 (51-100)<br>
+    <i class="fa fa-circle" style="color:orange"></i> 不健康 (101-150)<br>
+    <i class="fa fa-circle" style="color:red"></i> 危害 (151+)<br><br>
+    <b>避難所</b><br>
+    <i class="fa fa-home" style="color:blue"></i> 室內避難所<br>
+    <i class="fa fa-tree" style="color:green"></i> 室外避難所<br>
+    </div>
+    
+    
+            <div class="folium-map" id="map_12c0c7d8b5f89f7b8a488371c7b097b8" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_12c0c7d8b5f89f7b8a488371c7b097b8 = L.map(
+                "map_12c0c7d8b5f89f7b8a488371c7b097b8",
+                {
+                    center: [23.8, 120.9],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 7,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_07f2c7da51aeb96715bbb2b39df51017 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+                tile_layer_07f2c7da51aeb96715bbb2b39df51017.addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+    
+            var circle_marker_fe257f3026c4e5950dcf06d488c32f85 = L.circleMarker(
+                [25.0173, 121.5395],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+        var popup_af51f47b4d0067efab2ff9fa02af8338 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4a85be30d26aad08621823f183a7fcfd = $(`<div id="html_4a85be30d26aad08621823f183a7fcfd" style="width: 100.0%; height: 100.0%;">台北<br>AQI: 45</div>`)[0];
+                popup_af51f47b4d0067efab2ff9fa02af8338.setContent(html_4a85be30d26aad08621823f183a7fcfd);
+            
+        
+
+        circle_marker_fe257f3026c4e5950dcf06d488c32f85.bindPopup(popup_af51f47b4d0067efab2ff9fa02af8338)
+        ;
+
+        
+    
+    
+            var circle_marker_e2afa93a337bf591d108d7d9fa569410 = L.circleMarker(
+                [25.0167, 121.4667],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+        var popup_7213943562d317a18feac9c2129ba8ae = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c733e5fa6251f4f07770dec96f428fb6 = $(`<div id="html_c733e5fa6251f4f07770dec96f428fb6" style="width: 100.0%; height: 100.0%;">新北<br>AQI: 52</div>`)[0];
+                popup_7213943562d317a18feac9c2129ba8ae.setContent(html_c733e5fa6251f4f07770dec96f428fb6);
+            
+        
+
+        circle_marker_e2afa93a337bf591d108d7d9fa569410.bindPopup(popup_7213943562d317a18feac9c2129ba8ae)
+        ;
+
+        
+    
+    
+            var circle_marker_e6da7704355b19199535db160221a358 = L.circleMarker(
+                [24.1477, 120.6736],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+        var popup_9edf6631ad903d995316d3e4c09b2d79 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5e417480d4df03d60ceeb9960122b2bd = $(`<div id="html_5e417480d4df03d60ceeb9960122b2bd" style="width: 100.0%; height: 100.0%;">台中<br>AQI: 67</div>`)[0];
+                popup_9edf6631ad903d995316d3e4c09b2d79.setContent(html_5e417480d4df03d60ceeb9960122b2bd);
+            
+        
+
+        circle_marker_e6da7704355b19199535db160221a358.bindPopup(popup_9edf6631ad903d995316d3e4c09b2d79)
+        ;
+
+        
+    
+    
+            var circle_marker_7ff624b87d5444d27f491a538adcb336 = L.circleMarker(
+                [22.6273, 120.3014],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+        var popup_3953639d003360f46e3a7637a7ef2fa4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_5ba727a533d7a7c11799487dda6327d4 = $(`<div id="html_5ba727a533d7a7c11799487dda6327d4" style="width: 100.0%; height: 100.0%;">高雄<br>AQI: 150</div>`)[0];
+                popup_3953639d003360f46e3a7637a7ef2fa4.setContent(html_5ba727a533d7a7c11799487dda6327d4);
+            
+        
+
+        circle_marker_7ff624b87d5444d27f491a538adcb336.bindPopup(popup_3953639d003360f46e3a7637a7ef2fa4)
+        ;
+
+        
+    
+    
+            var circle_marker_de68634b018a6751ce884ed4f1939186 = L.circleMarker(
+                [22.9999, 120.2269],
+                {"bubblingMouseEvents": true, "color": "black", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 2}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+        var popup_8708377a6a0fabeb4f41929ce821ac72 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e3b96c2b842f3f2bee1872ee74f19263 = $(`<div id="html_e3b96c2b842f3f2bee1872ee74f19263" style="width: 100.0%; height: 100.0%;">台南<br>AQI: 41</div>`)[0];
+                popup_8708377a6a0fabeb4f41929ce821ac72.setContent(html_e3b96c2b842f3f2bee1872ee74f19263);
+            
+        
+
+        circle_marker_de68634b018a6751ce884ed4f1939186.bindPopup(popup_8708377a6a0fabeb4f41929ce821ac72)
+        ;
+
+        
+    
+    
+            var marker_ae9957a91f678a1ee923e05defb32a64 = L.marker(
+                [25.02, 121.54],
+                {}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+            var icon_c84fa1c54949f4083558585d82d4aa2b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_ae9957a91f678a1ee923e05defb32a64.setIcon(icon_c84fa1c54949f4083558585d82d4aa2b);
+        
+    
+        var popup_452602663824dbc4281afb12a613cbd5 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_19dac07403193eb0de99ecb384231934 = $(`<div id="html_19dac07403193eb0de99ecb384231934" style="width: 100.0%; height: 100.0%;">台北活動中心<br>類型: 室內</div>`)[0];
+                popup_452602663824dbc4281afb12a613cbd5.setContent(html_19dac07403193eb0de99ecb384231934);
+            
+        
+
+        marker_ae9957a91f678a1ee923e05defb32a64.bindPopup(popup_452602663824dbc4281afb12a613cbd5)
+        ;
+
+        
+    
+    
+            var marker_f2e801c6e3a038842fa2da254cb63a4d = L.marker(
+                [25.01, 121.46],
+                {}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+            var icon_a27dcaf7c0f0c175ea7699d54732e879 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "tree", "iconColor": "white", "markerColor": "green", "prefix": "fa"}
+            );
+            marker_f2e801c6e3a038842fa2da254cb63a4d.setIcon(icon_a27dcaf7c0f0c175ea7699d54732e879);
+        
+    
+        var popup_7b72a5834392b7f9d16f2c954b225874 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_cbda15aca90c1640b8d264dd647aa283 = $(`<div id="html_cbda15aca90c1640b8d264dd647aa283" style="width: 100.0%; height: 100.0%;">新北公園<br>類型: 室外</div>`)[0];
+                popup_7b72a5834392b7f9d16f2c954b225874.setContent(html_cbda15aca90c1640b8d264dd647aa283);
+            
+        
+
+        marker_f2e801c6e3a038842fa2da254cb63a4d.bindPopup(popup_7b72a5834392b7f9d16f2c954b225874)
+        ;
+
+        
+    
+    
+            var marker_e33fdc87f947c14d27bd3dec27c28415 = L.marker(
+                [24.15, 120.68],
+                {}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+            var icon_bd181a6ded962dbe25f1d18df2a1bb75 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_e33fdc87f947c14d27bd3dec27c28415.setIcon(icon_bd181a6ded962dbe25f1d18df2a1bb75);
+        
+    
+        var popup_e0fb82c6b7ee5f3816eb783e9ebf1915 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f4826606b12ddfb0228a684d9e33d34b = $(`<div id="html_f4826606b12ddfb0228a684d9e33d34b" style="width: 100.0%; height: 100.0%;">台中體育館<br>類型: 室內</div>`)[0];
+                popup_e0fb82c6b7ee5f3816eb783e9ebf1915.setContent(html_f4826606b12ddfb0228a684d9e33d34b);
+            
+        
+
+        marker_e33fdc87f947c14d27bd3dec27c28415.bindPopup(popup_e0fb82c6b7ee5f3816eb783e9ebf1915)
+        ;
+
+        
+    
+    
+            var marker_9a3d66aee08f4bdeb7b03192038f0ac0 = L.marker(
+                [22.62, 120.31],
+                {}
+            ).addTo(map_12c0c7d8b5f89f7b8a488371c7b097b8);
+        
+    
+            var icon_4973305450ba42ec49391521d4705794 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "tree", "iconColor": "white", "markerColor": "green", "prefix": "fa"}
+            );
+            marker_9a3d66aee08f4bdeb7b03192038f0ac0.setIcon(icon_4973305450ba42ec49391521d4705794);
+        
+    
+        var popup_18170644204f4c95848f01ff3c2dd4c1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e0d65c5a8b0fcdcd119ee4b3fcab828a = $(`<div id="html_e0d65c5a8b0fcdcd119ee4b3fcab828a" style="width: 100.0%; height: 100.0%;">高雄廣場<br>類型: 室外</div>`)[0];
+                popup_18170644204f4c95848f01ff3c2dd4c1.setContent(html_e0d65c5a8b0fcdcd119ee4b3fcab828a);
+            
+        
+
+        marker_9a3d66aee08f4bdeb7b03192038f0ac0.bindPopup(popup_18170644204f4c95848f01ff3c2dd4c1)
+        ;
+
+        
+    
+</script>
+</html>
