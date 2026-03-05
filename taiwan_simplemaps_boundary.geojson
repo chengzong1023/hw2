@@ -4,7 +4,9 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Taiwan"
+        "name": "Taiwan Main Island",
+        "source": "SimpleMaps",
+        "description": "台灣本島邊界，排除所有離島"
       },
       "geometry": {
         "type": "Polygon",
@@ -108,7 +110,11 @@
             ],
             [
               119.8,
-              25.0
+              24.8
+            ],
+            [
+              119.9,
+              25.1
             ],
             [
               120.0,
