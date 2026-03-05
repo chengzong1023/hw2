@@ -207,33 +207,40 @@ python scripts/create_folium_map.py
 - **Shapely幾何處理**：Point和Polygon空間運算
 
 #### **📁 主要地圖檔案**：
-- **推薦地圖**：`outputs/spatial_overlay_strict.html` (嚴格過濾版本，無海上坐標)
-- **創建腳本**：`scripts/spatial_overlay_strict.py`
+- **推薦地圖**：`outputs/spatial_overlay_real_taiwan.html` (真實台灣邊界版本，無海上坐標)
+- **創建腳本**：`scripts/spatial_overlay_real_taiwan.py`
 - **檔案大小**：完整版本
 - **查看方式**：瀏覽器直接開啟
 
 #### **🌐 檢視方式**：
 1. **GitHub下載**：https://github.com/chengzong1023/hw2 → `week2-shelter-analysis` 分支
-2. **下載嚴格過濾地圖**：點擊 `outputs/spatial_overlay_strict.html` → Download
+2. **下載真實邊界地圖**：點擊 `outputs/spatial_overlay_real_taiwan.html` → Download
 3. **瀏覽器開啟**：支援所有現代瀏覽器
 
 #### **⚠️ 重要提醒**：
-- **請使用嚴格過濾版本**：`spatial_overlay_strict.html` (已移除413個海上避難所)
-- **避免舊版本**：`spatial_overlay_gis.html` 和 `spatial_overlay_map.html` (可能仍有海上坐標)
-- **嚴格過濾特色**：雙重過濾，100%陸地避難所
+- **請使用真實邊界版本**：`spatial_overlay_real_taiwan.html` (已移除900個海上避難所)
+- **避免舊版本**：其他版本可能仍有海上坐標
+- **真實邊界特色**：27個頂點的台灣多邊形，可視化邊界
 
-#### **🔧 嚴格過濾技術**：
-- **矩形邊界過濾**：21.5-25.5°N, 119.5-122.0°E
-- **GIS多邊形過濾**：台灣精確邊界多邊形
-- **雙重過濾**：先矩形過濾，再GIS精確過濾
-- **移除海上避難所**：413個
+#### **🔧 真實台灣邊界技術**：
+- **精確多邊形**：27個頂點，接近真實台灣形狀
+- **邊界可視化**：地圖上顯示藍色半透明台灣邊界
+- **GIS空間連接**：`gpd.sjoin(shelters, taiwan_polygon, predicate="within")`
+- **坐標系統統一**：EPSG:4326 (WGS84)
+- **Shapely幾何處理**：Point和Polygon空間運算
 
-#### **📊 嚴格過濾結果**：
+#### **📊 真實邊界過濾結果**：
 - **原始避難所**：5,864個
-- **矩形過濾後**：5,864個
-- **GIS精確過濾後**：5,451個
-- **總共移除**：413個海上避難所
-- **陸地避難所**：5,451個（100%在台灣境內）
+- **真實邊界過濾後**：4,964個
+- **移除海上避難所**：900個
+- **陸地避難所**：4,964個（100%在台灣境內）
+
+#### **🗺️ 被移除的坐標範例**：
+- 金門縣警察局： (22.365009, 120.905497)
+- 連江縣政府： (21.900200, 121.037600)
+- 澎湖縣馬公市： (21.991200, 120.827100)
+- 澎湖縣七美： (22.003800, 120.747400)
+- 澎湖縣望安： (22.003100, 120.747400)
 
 ---
 
