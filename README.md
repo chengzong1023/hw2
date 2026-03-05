@@ -201,15 +201,28 @@ python scripts/create_folium_map.py
 - **情境模擬**：高雄站AQI=150，林口站AQI=120
 
 #### **📁 檔案資訊**：
-- **地圖檔案**：`outputs/spatial_overlay_map.html`
-- **創建腳本**：`scripts/spatial_overlay_map.py`
-- **檔案大小**：29KB（優化後）
+- **地圖檔案**：`outputs/spatial_overlay_gis.html` (GIS版本，推薦)
+- **創建腳本**：`scripts/spatial_overlay_gis.py`
+- **檔案大小**：完整版本
 - **查看方式**：瀏覽器直接開啟
 
 #### **🌐 檢視方式**：
 1. **GitHub下載**：https://github.com/chengzong1023/hw2 → `week2-shelter-analysis` 分支
-2. **本地查看**：`outputs/spatial_overlay_map.html`
+2. **本地查看**：`outputs/spatial_overlay_gis.html`
 3. **瀏覽器開啟**：支援所有現代瀏覽器
+
+#### **🔧 GIS技術特色**：
+- **GeoPandas空間連接**：使用`gpd.sjoin(shelters, taiwan_polygon, predicate="within")`
+- **精確邊界定義**：台灣多邊形邊界，確保只保留陸地避難所
+- **海上坐標移除**：精確移除67個海上避難所
+- **坐標系統統一**：EPSG:4326 (WGS84)
+- **Shapely幾何處理**：Point和Polygon空間運算
+
+#### **📊 GIS過濾結果**：
+- **原始避難所**：5,864個
+- **GIS過濾後**：5,797個
+- **移除海上避難所**：67個
+- **陸地避難所**：5,797個（100%在台灣境內）
 
 ---
 
