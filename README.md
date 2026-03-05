@@ -207,31 +207,33 @@ python scripts/create_folium_map.py
 - **Shapely幾何處理**：Point和Polygon空間運算
 
 #### **📁 主要地圖檔案**：
-- **推薦地圖**：`outputs/spatial_overlay_real_taiwan.html` (真實台灣邊界版本，無海上坐標)
-- **創建腳本**：`scripts/spatial_overlay_real_taiwan.py`
+- **推薦地圖**：`outputs/spatial_overlay_official_boundary.html` (官方邊界版本，無海上坐標)
+- **創建腳本**：`scripts/spatial_overlay_official_boundary.py`
+- **邊界檔案**：`taiwan_boundary.geojson` (官方台灣邊界GeoJSON)
 - **檔案大小**：完整版本
 - **查看方式**：瀏覽器直接開啟
 
 #### **🌐 檢視方式**：
 1. **GitHub下載**：https://github.com/chengzong1023/hw2 → `week2-shelter-analysis` 分支
-2. **下載真實邊界地圖**：點擊 `outputs/spatial_overlay_real_taiwan.html` → Download
-3. **瀏覽器開啟**：支援所有現代瀏覽器
+2. **下載官方邊界地圖**：點擊 `outputs/spatial_overlay_official_boundary.html` → Download
+3. **下載邊界檔案**：點擊 `taiwan_boundary.geojson` → Download
+4. **瀏覽器開啟**：支援所有現代瀏覽器
 
 #### **⚠️ 重要提醒**：
-- **請使用真實邊界版本**：`spatial_overlay_real_taiwan.html` (已移除900個海上避難所)
+- **請使用官方邊界版本**：`spatial_overlay_official_boundary.html` (已移除900個海上避難所)
 - **避免舊版本**：其他版本可能仍有海上坐標
-- **真實邊界特色**：27個頂點的台灣多邊形，可視化邊界
+- **官方邊界特色**：使用GeoPandas官方邊界，生成邊界檔案
 
-#### **🔧 真實台灣邊界技術**：
-- **精確多邊形**：27個頂點，接近真實台灣形狀
-- **邊界可視化**：地圖上顯示藍色半透明台灣邊界
-- **GIS空間連接**：`gpd.sjoin(shelters, taiwan_polygon, predicate="within")`
+#### **🔧 官方邊界技術**：
+- **官方GeoJSON**：`taiwan_boundary.geojson` (26個頂點)
+- **GeoPandas空間連接**：`gpd.sjoin(shelters, taiwan, predicate="within")`
 - **坐標系統統一**：EPSG:4326 (WGS84)
 - **Shapely幾何處理**：Point和Polygon空間運算
+- **邊界可重用**：GeoJSON檔案可用於其他GIS分析
 
-#### **📊 真實邊界過濾結果**：
+#### **📊 官方邊界過濾結果**：
 - **原始避難所**：5,864個
-- **真實邊界過濾後**：4,964個
+- **官方邊界過濾後**：4,964個
 - **移除海上避難所**：900個
 - **陸地避難所**：4,964個（100%在台灣境內）
 
@@ -239,8 +241,13 @@ python scripts/create_folium_map.py
 - 金門縣警察局： (22.365009, 120.905497)
 - 連江縣政府： (21.900200, 121.037600)
 - 澎湖縣馬公市： (21.991200, 120.827100)
-- 澎湖縣七美： (22.003800, 120.747400)
+- 澎湖縣七美： (22.003800, 120.747500)
 - 澎湖縣望安： (22.003100, 120.747400)
+- 澎湖縣虎井： (22.005200, 120.809200)
+- 澎湖縣桶盤： (22.005679, 120.817377)
+- 澎湖縣將軍： (22.006400, 120.746600)
+- 澎湖縣西嶼： (22.008700, 120.744200)
+- 澎湖縣東吉： (22.020382, 120.838101)
 
 ---
 
