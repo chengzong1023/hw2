@@ -398,10 +398,10 @@ class SpatialOverlayNewData:
         # 添加圖例
         legend_html = '''
         <div style="position: fixed; 
-                    top: 10px; right: 10px; width: 220px; height: 300px; 
+                    top: 10px; right: 10px; width: 200px; height: 240px; 
                     background-color: white; border:2px solid grey; z-index:9999; 
                     font-size:12px; padding: 10px">
-        <h4>Spatial Overlay 圖例 (新資料)</h4>
+        <h4>Spatial Overlay 圖例</h4>
         <b>AQI 測站</b><br>
         <i class="fa fa-circle" style="color:green"></i> 良好 (0-50)<br>
         <i class="fa fa-circle" style="color:yellow"></i> 普通 (51-100)<br>
@@ -411,10 +411,7 @@ class SpatialOverlayNewData:
         <i class="fa fa-circle" style="color:maroon"></i> 危害 (301+)<br><br>
         <b>避難所</b><br>
         <i class="fa fa-home" style="color:blue"></i> 室內避難所<br>
-        <i class="fa fa-tree" style="color:green"></i> 室外避難所<br><br>
-        <b>過濾方式</b><br>
-        <i class="fa fa-filter" style="color:red"></i> 精確邊界過濾<br>
-        <i class="fa fa-exclamation-triangle" style="color:orange"></i> 排除所有離島<br>
+        <i class="fa fa-tree" style="color:green"></i> 室外避難所<br>
         </div>
         '''
         m.get_root().html.add_child(folium.Element(legend_html))
