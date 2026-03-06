@@ -290,22 +290,6 @@ class SpatialOverlayNewData:
             tiles='OpenStreetMap'
         )
         
-        # 添加SimpleMaps台灣邊界
-        taiwan_gdf = self.download_simplemaps_taiwan_boundary()
-        if taiwan_gdf is not None:
-            boundary_group = folium.FeatureGroup(name='SimpleMaps台灣本島邊界')
-            folium.GeoJson(
-                taiwan_gdf,
-                style_function=lambda x: {
-                    'fillColor': 'blue',
-                    'color': 'blue',
-                    'weight': 3,
-                    'fillOpacity': 0.1,
-                },
-                tooltip='SimpleMaps台灣本島邊界 (排除離島)'
-            ).add_to(boundary_group)
-            boundary_group.add_to(m)
-        
         # 添加AQI測站圖層
         aqi_group = folium.FeatureGroup(name='AQI 測站')
         
@@ -414,7 +398,7 @@ class SpatialOverlayNewData:
         # 添加圖例
         legend_html = '''
         <div style="position: fixed; 
-                    top: 10px; right: 10px; width: 260px; height: 400px; 
+                    top: 10px; right: 10px; width: 220px; height: 300px; 
                     background-color: white; border:2px solid grey; z-index:9999; 
                     font-size:12px; padding: 10px">
         <h4>Spatial Overlay 圖例 (新資料)</h4>
@@ -428,10 +412,8 @@ class SpatialOverlayNewData:
         <b>避難所</b><br>
         <i class="fa fa-home" style="color:blue"></i> 室內避難所<br>
         <i class="fa fa-tree" style="color:green"></i> 室外避難所<br><br>
-        <b>邊界</b><br>
-        <i class="fa fa-map" style="color:blue"></i> SimpleMaps台灣本島邊界<br>
+        <b>過濾方式</b><br>
         <i class="fa fa-filter" style="color:red"></i> 精確邊界過濾<br>
-        <i class="fa fa-download" style="color:green"></i> taiwan_simplemaps_boundary.geojson<br>
         <i class="fa fa-exclamation-triangle" style="color:orange"></i> 排除所有離島<br>
         </div>
         '''
