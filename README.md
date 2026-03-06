@@ -202,17 +202,17 @@ python scripts/create_folium_map.py
 
 #### **🔧 新資料SimpleMaps官方邊界技術**：
 - **新資料來源**：`C:/Users/admin/Desktop/遙測/避難所clean.csv`
-- **官方GeoJSON**：`taiwan_simplemaps_boundary.geojson` (27個頂點)
+- **後台過濾**：SimpleMaps官方台灣本島邊界（27個頂點）
 - **精確邊界**：台灣本島邊界，排除所有離島
 - **GeoPandas空間連接**：`gpd.sjoin(shelters, taiwan, predicate="within")`
 - **坐標系統統一**：EPSG:4326 (WGS84)
 - **Shapely幾何處理**：Point和Polygon空間運算
 - **邊界面積**：5.660000平方度
+- **乾淨視覺化**：地圖上不顯示邊界線，只保留過濾結果
 
 #### **📁 主要地圖檔案**：
-- **最新地圖**：`outputs/spatial_overlay_new_data.html` (新資料版本)
+- **最新地圖**：`outputs/spatial_overlay_new_data.html` (新資料版本，乾淨視覺化)
 - **創建腳本**：`scripts/spatial_overlay_new_data.py`
-- **邊界檔案**：`taiwan_simplemaps_boundary.geojson` (SimpleMaps官方台灣邊界)
 - **新資料來源**：`C:/Users/admin/Desktop/遙測/避難所clean.csv`
 - **檔案大小**：完整版本
 - **查看方式**：瀏覽器直接開啟
@@ -220,13 +220,13 @@ python scripts/create_folium_map.py
 #### **🌐 檢視方式**：
 1. **GitHub下載**：https://github.com/chengzong1023/hw2 → `week2-shelter-analysis` 分支
 2. **下載新資料地圖**：點擊 `outputs/spatial_overlay_new_data.html` → Download
-3. **下載邊界檔案**：點擊 `taiwan_simplemaps_boundary.geojson` → Download
-4. **瀏覽器開啟**：支援所有現代瀏覽器
+3. **瀏覽器開啟**：支援所有現代瀏覽器
 
 #### **⚠️ 重要提醒**：
 - **請使用新資料版本**：`spatial_overlay_new_data.html` (已移除957個海上/離島避難所)
 - **新資料來源**：使用最新的避難所CSV檔案
-- **精確邊界過濾**：使用SimpleMaps官方台灣本島邊界
+- **精確邊界過濾**：使用SimpleMaps官方台灣本島邊界（後台處理）
+- **乾淨視覺化**：地圖上不顯示邊界線，只保留過濾後的避難所
 - **排除所有離島**：確保只顯示台灣本島避難所
 
 #### **🗺️ 被移除的坐標範例**：
